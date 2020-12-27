@@ -6,10 +6,10 @@
 String timestamp;
 float theta;
 float counter = 0;
-float noPetals = 4;
+float noPetals = 8;
 float reductionFactor = 0.66;
-float cutOff = 7;
-float branchFactor = 2;
+float cutOff = 5; // slows down if cutOff < 2
+float branchFactor = 1; // slows down if branchFactor > 2
 
 // --- Setup ---
 void setup() {
@@ -27,12 +27,12 @@ void draw() {
   theta = radians(counter);
   
   // move origin to center of screen
-  //translate(width/2, height/2);
-  translate(0,height);
+  translate(width/2, height/2);
+  //translate(0,height);
   // draw petals, rotating by PI/(noPetals/2) each time
   for(int i = 0; i < noPetals; i++) {
     drawPetal();
-    rotate(PI / noPetals/2.0);
+    rotate(PI / noPetals*2);
   }
 }
 
@@ -87,7 +87,9 @@ void drawPetal() {
 }
 
 // --- Interactions ---
+/*
 void keyPressed() {
+  // screenshot
   if(key == ' ') {
     timestamp = year() + nf(month(),2) + nf(day(),2) + "-" + nf(hour(),2) + nf(minute(),2) + nf(second(),2);
     saveFrame(timestamp+".png");
@@ -108,3 +110,4 @@ void keyPressed() {
     }
   }
 }
+*/
