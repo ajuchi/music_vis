@@ -21,13 +21,11 @@ AudioPlayer song;
 // --- Setup ---
 void setup() {
   size(800, 800);
-  
-  smooth();
   frameRate(60);
   stroke(#fcbf49);
+  background(#003049);
   
   // minim setup
-  
   minim = new Minim(this);
   // loads sound file
   song = minim.loadFile("julia_florida_EDIT.mp3", 4096);
@@ -38,8 +36,6 @@ void setup() {
 
 // --- Main Loop ---
 void draw() {
-  
-  text(song.right.level(), 10,10);
   background(#003049);
   // increase angle by one
   counter += (song.right.level()+song.left.level())/2 * 10;
