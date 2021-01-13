@@ -1,3 +1,6 @@
+import ddf.minim.*;
+import ddf.minim.analysis.*;
+
 // Fractal Flower
 // * adapted from Fractal Flower project by user morphogen
 // * from: https://www.openprocessing.org/sketch/64159/
@@ -8,22 +11,38 @@ float theta;
 float counter = 0;
 float noPetals = 8;
 float reductionFactor = 0.66;
-float cutOff = 5; // slows down if cutOff < 2
+float cutOff = 10; // slows down if cutOff < 2
 float branchFactor = 1; // slows down if branchFactor > 2
+
+// minim object variables
+Minim minim;
+AudioPlayer song;
 
 // --- Setup ---
 void setup() {
-  size(400, 400);
+  size(800, 800);
+  
   smooth();
-  frameRate(30);
-  stroke(255);
+  frameRate(60);
+  stroke(#fcbf49);
+  
+  // minim setup
+  
+  minim = new Minim(this);
+  // loads sound file
+  song = minim.loadFile("julia_florida_EDIT.mp3", 4096);
+  
+  // plays file
+  song.play(0);
 }
 
 // --- Main Loop ---
 void draw() {
-  background(0);
+  
+  text(song.right.level(), 10,10);
+  background(#003049);
   // increase angle by one
-  counter += 1;
+  counter += (song.right.level()+song.left.level())/2 * 10;
   theta = radians(counter);
   
   // move origin to center of screen
